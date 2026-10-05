@@ -1,0 +1,11 @@
+[package]
+name = "watchout"
+version = "0.1.0"
+edition = "2021"
+description = "Placeholder terminal UI"
+license = "MIT"
+rust-version = "1.88"
+
+[dependencies]
+crossterm = "0.29"
+ratatui = "0.30"

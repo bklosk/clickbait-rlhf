@@ -1,10 +1,3 @@
-# watchout
-AI threat hunter
+# In-browser clickbait rlhf
 
-Placeholder terminal UI. Build and run it with:
-
-```sh
-cargo run
-```
-
-Press `q` or Ctrl-C to quit.
+I wanted to demonstrate FLHF in real-time; the user A/B selects and watches the model re-rank instantly

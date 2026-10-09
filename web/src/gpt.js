@@ -276,6 +276,7 @@ export class GPT {
   _upload(tokens, B, T) {
     const M = B * T;
     if (tokens.length !== M) throw new Error(`expected ${M} tokens, got ${tokens.length}`);
+    if (M > this.maxRows) throw new Error(`batch ${B}x${T} exceeds maxRows ${this.maxRows}`);
     const tok = Uint32Array.from(tokens);
     const tgt = new Int32Array(M);
     for (let m = 0; m < M; m++) tgt[m] = m % T === T - 1 ? -1 : tok[m + 1];

@@ -6,7 +6,9 @@ import { DPOSession } from "./rlhf.js";
 export { GPT, parseModel, Tokenizer, DPOSession };
 export { sampleLogits } from "./gpt.js";
 
-export class WebGPUUnavailableError extends Error {}
+export class WebGPUUnavailableError extends Error {
+  name = "WebGPUUnavailableError";
+}
 
 /** Fetch a .bin, build the tokenizer and the GPU model. */
 export async function loadHeadlineGPT(url, device, opts) {

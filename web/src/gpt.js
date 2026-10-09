@@ -71,8 +71,8 @@ export class GPT {
     if (cfg.ctx > 32 || cfg.d / cfg.heads > 32) throw new Error("attention kernels support ctx <= 32 and head dim <= 32");
     this.pipes = {};
     const pipe = (label, code, constants) => {
-      const module = device.createShaderModule({ code, label });
-      this.pipes[label] = device.createComputePipeline({ layout: "auto", compute: { module, entryPoint: "main", constants }, label });
+      const shader = device.createShaderModule({ code, label });
+      this.pipes[label] = device.createComputePipeline({ layout: "auto", compute: { module: shader, entryPoint: "main", constants }, label });
     };
     for (const [name, code] of Object.entries(K)) pipe(name, code);
     pipe("matmulSmall", K.matmul, { RT: 2 });
@@ -289,7 +289,8 @@ export class GPT {
     const byTok = new Map();
     for (let m = 0; m < M; m++) {
       const list = byTok.get(tok[m]);
-      list ? list.push(m) : byTok.set(tok[m], [m]);
+      if (list) list.push(m);
+      else byTok.set(tok[m], [m]);
     }
     const csr = new Uint32Array(1 + cap + cap + 1 + M);
     csr[0] = byTok.size;

@@ -1,0 +1,6 @@
+[project]
+name = "clickbait-pretrain"
+version = "0.1.0"
+description = "Offline pretraining of the tiny headline GPT"
+requires-python = ">=3.12"
+dependencies = ["torch>=2.8", "numpy"]

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>headline-gpt · WebGPU</title>
+<style>
+  body { font: 15px/1.5 ui-sans-serif, system-ui, sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; color: #1b1b1f; }
+  h1 { font-size: 1.3rem; margin-bottom: .2rem; }
+  #status { color: #666; font-size: .9rem; white-space: pre-line; }
+  button { font: inherit; padding: .35rem .8rem; margin-right: .4rem; cursor: pointer; }
+  ol { padding-left: 1.4rem; }
+  li { margin: .15rem 0; }
+  .row { margin: 1rem 0; display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+  input[type=text] { flex: 1; min-width: 16rem; font: inherit; padding: .3rem .5rem; }
+  #log { font: 12px/1.4 ui-monospace, monospace; color: #444; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>headline-gpt</h1>
+<div id="status">loading…</div>
+
+<div class="row">
+  <button id="gen" disabled>Sample 8 headlines</button>
+  <label>temperature <input id="temp" type="number" value="0.9" step="0.1" min="0" max="2" style="width:4rem"></label>
+</div>
+<ol id="samples"></ol>
+
+<h2 style="font-size:1.05rem">In-browser training check</h2>
+<p style="color:#666;font-size:.9rem">Runs supervised steps on one headline so you can watch its likelihood climb, then resets.
+This is the same forward/backward/AdamW path an RLHF loop will use.</p>
+<div class="row">
+  <input id="target" type="text" value="you won't believe what this council did next">
+  <button id="train" disabled>Train 20 steps</button>
+  <button id="reset" disabled>Reset weights</button>
+</div>
+<div id="log"></div>
+
+<script type="module" src="./demo.js"></script>
+</body>
+</html>
